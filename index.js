@@ -15,6 +15,9 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+app.get("/", (req, res) => { 
+    res.send("/upload : to upload data\n /getdata : to get data");
+});
 app.get("/getdata", async (req, res) => {
   const data = await Data.find({});
   res.send(data);
