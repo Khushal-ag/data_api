@@ -4,6 +4,9 @@ const app = express();
 const mongo = require("mongoose");
 const Data = require("./model/data");
 const seed = require("./seedData");
+const cors = require("cors");
+
+app.use(cors());
 
 const dburl = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/data-api";
 mongo.set("strictQuery", false);
@@ -15,8 +18,8 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-app.get("/", (req, res) => { 
-    res.send("/upload : to upload data\n /getdata : to get data");
+app.get("/", (req, res) => {
+  res.send("/upload : to upload data\n /getdata : to get data");
 });
 app.get("/getdata", async (req, res) => {
   const data = await Data.find({});
